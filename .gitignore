@@ -1,0 +1,49 @@
+
+/**
+ * Write a description of Word_Play here.
+ * "ASSIGNMENT # 1"
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Word_Play {
+    public String is_vowel(char a){
+        if(a == 'A' || a == 'E' ||a == 'I' || a =='O' || a == 'U' || a == 'a' || a == 'i' || a == 'o' || a == 'u' || a == 'e'){
+            System.out.println("true");
+        }
+        else{System.out.println("false");}
+        return "";
+    }
+    public String replace_vowels(String phrase, char ch){
+        StringBuilder New = new StringBuilder(phrase);
+        for(int i=0; i< phrase.length(); i++){
+            char a = New.charAt(i);
+            if(a == 'A' || a == 'E' ||a == 'I' || a =='O' || a == 'U' || a == 'a' || a == 'i' || a == 'o' || a == 'u' || a == 'e'){
+                New.setCharAt(i,ch);
+            }
+        }
+        return New.toString();
+    }
+    public String emphasize(String phrase, char ch){
+        StringBuilder New = new StringBuilder(phrase);
+        for(int i = 0; i<phrase.length();i++){
+            char a = New.charAt(i);
+            if(a == ch){
+                if((i+1)%2 == 0){
+                    New.setCharAt(i,'+');
+                }
+                else{
+                    New.setCharAt(i,'*');
+                }
+            }
+        }
+        return New.toString();
+    }
+    void tester(){
+        is_vowel('F');
+        is_vowel('e');
+        String result = replace_vowels("My wife should be like a girlfriend" , '*');
+        System.out.println(result);
+        String result1 = emphasize("Mary Bella Abracadabra", 'a');
+        System.out.println(result1);
+    }
+}
