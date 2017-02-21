@@ -41,7 +41,7 @@ public class Word_Play {
     void tester(){
         is_vowel('F');
         is_vowel('e');
-        String result = replace_vowels("My wife should be like a girlfriend" , '*');
+        String result = replace_vowels("Mary Bella Abracadabra" , '*');
         System.out.println(result);
         String result1 = emphasize("Mary Bella Abracadabra", 'a');
         System.out.println(result1);
