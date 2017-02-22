@@ -1,0 +1,60 @@
+
+/**
+ * Write a description of Caesar_cipher here.
+ * ASSIGNMENT # 2
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Caesar_cipher {
+    public String encrypt(String phrase , int key){
+        int idx=0;
+        char newchar = ' ';
+        char currchar = ' ';
+        StringBuilder New = new StringBuilder(phrase);
+        String ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String alpha = "abcdefghijklmnopqrstuvwxyz";
+        String SALPHA = ALPHA.substring(key) + ALPHA.substring(0,key);
+        String salpha = alpha.substring(key) + alpha.substring(0,key);
+        Encrypter(phrase, currchar, newchar, New, ALPHA, alpha, SALPHA, salpha, idx , 1 , 0);
+        return New.toString();
+    }
+    public void Encrypter(String phrase, char currchar, char newchar, StringBuilder New, String ALPHA, String alpha, String SALPHA, String salpha, int idx, int shift, int start){
+        for(int i=start; i<phrase.length(); i = i+shift){
+            currchar = New.charAt(i);
+            if(Character.isLowerCase(currchar)){
+                idx = alpha.indexOf(currchar);
+                if(idx != -1){
+                    newchar = salpha.charAt(idx);
+                    New.setCharAt(i,newchar);
+                }
+            }
+            else{
+                idx = ALPHA.indexOf(currchar);
+                if(idx != -1){
+                   newchar = SALPHA.charAt(idx);
+                   New.setCharAt(i,newchar);
+                }
+            }
+        }
+    }
+    public String two_key_encrypt(String phrase, int key1, int key2){
+        int idx=0;
+        char newchar = ' '; char currchar = ' ';
+        StringBuilder New = new StringBuilder(phrase);
+        String ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String alpha = "abcdefghijklmnopqrstuvwxyz";
+        String SALPHA = ALPHA.substring(key1) + ALPHA.substring(0,key1);
+        String salpha = alpha.substring(key1) + alpha.substring(0,key1);
+        String SALPHA1 = ALPHA.substring(key2) + ALPHA.substring(0,key2);
+        String salpha1 = alpha.substring(key2) + alpha.substring(0,key2);
+        Encrypter(phrase, currchar, newchar, New, ALPHA, alpha, SALPHA, salpha, idx , 2 , 0);
+        Encrypter(phrase, currchar, newchar, New, ALPHA, alpha, SALPHA1, salpha1, idx , 2 , 1);
+        return New.toString();
+    }
+    public void tester(){
+        String a = encrypt("At noon be in the conference room with your hat on for a surprise party. YELL LOUD!" , 15);
+        System.out.println(a);
+        String b = two_key_encrypt("At noon be in the conference room with your hat on for a surprise party. YELL LOUD!", 8, 21);
+        System.out.println(b);
+    }
+}
