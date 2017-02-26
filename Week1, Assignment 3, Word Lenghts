@@ -1,0 +1,51 @@
+
+/**
+ * Write a description of Words_length here.
+ * ASSIGNMENT # 3
+ * @author (Muhammad Arslan Ansari) 
+ * @version (26 Feb, 2017)
+ */
+import edu.duke.*;
+import java.lang.*;
+public class Words_length {
+    int wordlength = 0;
+    public void countWordLengths(FileResource resource, int[] count){
+        for(String word: resource.words()){
+            StringBuilder sb = new StringBuilder(word);
+            int length = 0;
+            for(int k=0; k<sb.length(); k++){
+                if(k==0 && !Character.isLetter(sb.charAt(k))){
+                    sb.deleteCharAt(k);
+                }
+                else if(k==(sb.length()-1) && !Character.isLetter(sb.charAt(k))){
+                    sb.deleteCharAt(k);
+                }
+                else{
+                    length++;
+                }
+            }
+            count[length]++;
+        }
+    }
+    public int indexOfMax(int[] count){
+        int a=0;
+        for(int i = 0; i < count.length; i++){
+            if(a < count[i]){
+                a = count[i];
+            }
+        }
+        for(int i=0; i<count.length; i++){
+            if(count[i] == a){
+               wordlength = i;
+            }
+        }
+        System.out.println("Word's length with most occurences: "+wordlength);
+        return a;
+    }
+	public void testCountWordLengths(){
+		FileResource resource = new FileResource();
+		int[] counts = new int[31];
+		countWordLengths(resource, counts);
+		System.out.println("Number of occurences are: "+indexOfMax(counts));
+	}
+}
